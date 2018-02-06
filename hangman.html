@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hangman</title>
+</head>
+
+<object>
+<param name="autostart" value="true">
+<param name="src" value="sound.mp3">
+<param name="autoplay" value="true"> 
+<param name="controller" value="true">
+</object>
+
+<body>
+<center><h1><font color="black">Hangman: Spongebob Version</font></center>
+<div class="container">
+            <div class="row">
+                    <div class="col-sm-1">
+                    <img style="float:left" width=300px height=150px src="http://www.ebhasin.com/games/games-source/javascript/Hangman-%28Beers%29/src/pics/h0.png">
+                    <p><h2>Press Any Key to Get Started</h2></p>
+                    <p><font id="firstBlankLetter">_&ensp;</font><font id="secondBlankLetter">_&ensp;</font><font id="thirdBlankLetter">_&ensp;</font><font id="fourthBlankLetter">_&ensp;</font><font id="fifthBlankLetter">_&ensp;</font><font id="sixthBlankLetter">_&ensp;</font><font id="seventhBlankLetter">_&ensp;</font></p>
+                    <br>
+                    <hr color=#000>
+                    <h3 id="guessesRemainingCount">Number of Guesses Remaining: 6</h3>
+                    <h3 id="lettersAlreadyGuessed">Letters Already Guessed: </h3>
+                    <hr color=#000>
+                    <h3 id="wins">Wins: 0</h3>
+                    <h3 id="losses">Losses: 0</h3><div id="losses"></div>
+                    </div>
+            </div>
+</div>
+
+
+
+</body>
+    <style>
+        body {
+            background-image: url("http://pre15.deviantart.net/52bf/th/pre/f/2016/164/5/e/spongebob_background_thing_by_fluffymystic-da62dtt.png");
+            background-size: 100%;
+        }
+
+        .col-sm-1 {
+    padding: 40px;
+    background-image: url("http://goingcrazywannago.com/wp-content/uploads/2014/02/spongebob-background.jpg");
+    background-size: 100%;
+    width: 40%;
+    height: 60%;
+    position: absolute;
+    height: 400px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+    margin-top: 3%;
+    float: left;
+    border: #000 solid 4px;
+    border-radius: 1%;
+    margin-left:24%;
+    margin-right:28%;
+    }
+
+    font {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+
+    </style>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous">
+  </script>
+
+    <script>
+
+    var winsCount = 0
+
+    var lossesCount = 0
+
+    var wordCount = 0
+
+
+    document.onkeyup = function(event) {
+
+        var guessesAlready = []
+
+        var guessesRemaining = 6
+
+        var word = "patrick"
+
+        var userGuess = event.key
+	        
+        var wrongLetters = "bdefghjlmnoqsuvwxyz";
+
+
+        for (var i = 0; i < wrongLetters.length; i++) {
+            if (userGuess === wrongLetters.charAt(i)) {
+                guessesAlready.push(userGuess);
+                $("#lettersAlreadyGuessed").append(guessesAlready + "  ");
+                guessesRemaining--;
+            }
+        }
+
+        $("#guessesRemainingCount").html("Number of Guesses Remaining: " + guessesRemaining);
+
+        if (guessesRemaining === 0) {
+            lossesCount = 1
+            $("#losses").html("Losses: " + lossesCount);
+        }
+
+
+        if (userGuess === "p") {
+            $("#firstBlankLetter").html("P&ensp;");
+            wordCount++
+        } else if (userGuess === "a") {
+            $("#secondBlankLetter").html("A&ensp;");
+            wordCount++
+        } else if (userGuess === "t") {
+            $("#thirdBlankLetter").html("T&ensp;");
+            wordCount++
+        } else if (userGuess === "r") {
+            $("#fourthBlankLetter").html("R&ensp;");
+            wordCount++
+        } else if (userGuess === "i") {
+            $("#fifthBlankLetter").html("I&ensp;");
+            wordCount++
+        } else if (userGuess === "c") {
+            $("#sixthBlankLetter").html("C&ensp;");
+            wordCount++
+        } else if (userGuess === "k") {
+            $("#seventhBlankLetter").html("K&ensp;");
+            wordCount++
+        } else {
+            guessesAlready.push(userGuess);
+        }
+
+        
+        if (wordCount === 7) {
+            winsCount = 1
+            $("#wins").html("Wins: " + winsCount);
+        }
+
+        
+    };
+
+
+    </script>
+
+</html>
