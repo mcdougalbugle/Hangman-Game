@@ -81,12 +81,12 @@
 
     var wordCount = 0
 
+    var guessesRemaining = 6
 
     document.onkeyup = function(event) {
 
         var guessesAlready = []
 
-        var guessesRemaining = 6
 
         var word = "patrick"
 
@@ -99,15 +99,18 @@
             if (userGuess === wrongLetters.charAt(i)) {
                 guessesAlready.push(userGuess);
                 $("#lettersAlreadyGuessed").append(guessesAlready + "  ");
-                guessesRemaining--;
+                guessesRemaining-=1
             }
         }
 
+        console.log(guessesAlready.length)
+
         $("#guessesRemainingCount").html("Number of Guesses Remaining: " + guessesRemaining);
 
-        if (guessesRemaining === 0) {
-            lossesCount = 1
+        if (guessesRemaining === -1) {
+            lossesCount++
             $("#losses").html("Losses: " + lossesCount);
+            alert("You lose!")
         }
 
 
@@ -140,6 +143,10 @@
         if (wordCount === 7) {
             winsCount = 1
             $("#wins").html("Wins: " + winsCount);
+
+        if (winsCount === 1) {
+            alert("You won!")
+        }
         }
 
         
